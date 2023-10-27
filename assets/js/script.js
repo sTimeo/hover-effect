@@ -1,26 +1,47 @@
-const indices = [1, 3, 4, 6, 7, 8];
-const elements = {};
+const animations = {
+    1: {
+        caseLeaveA: { x: "-100%", y: "100%" },
+        caseLeaveB: { x: "100%", y: "100%" }
+    },
+    3: {
+        caseLeaveA: { x: "-100%", y: "-100%" },
+        caseLeaveB: { x: "100%", y: "100%" }
+    },
+    4: {
+        caseLeaveA: { x: "100%", y: "-100%" },
+        caseLeaveB: { x: "-100%", y: "100%" }
+    },
+    6: {
+        caseLeaveA: { x: "100%", y: "-100%" },
+        caseLeaveB: { x: "-100%", y: "100%" }
+    },
+    7: {
+        caseLeaveA: { x: "100%", y: "-100%" },
+        caseLeaveB: { x: "100%", y: "100%" }
+    },
+    8: {
+        caseLeaveA: { x: "-100%", y: "100%" },
+        caseLeaveB: { x: "100%", y: "100%" }
+    },
+};
 
-// Sélectionner les éléments <li> et leurs div .case-a et .case-b
-indices.forEach(index => {
+for (const index in animations) {
     const li = document.querySelector(`#effect-a ul li:nth-child(${index})`);
     const caseA = li.querySelector(".case-num");
     const caseB = li.querySelector(".case-title");
-    
-    elements[index] = { li, caseA, caseB };
-    
-    // Animation d'apparition
+
     li.addEventListener("mouseenter", () => {
-        gsap.to(caseA, { opacity: 1, x: "0", y: "0", duration: 0.2 });
-        gsap.to(caseB, { opacity: 1, x: "0", y: "0", duration: 0.2 });
+   gsap.to(caseA, { opacity: 1, x: "0", y: "0", duration: 0.2 });
+    gsap.to(caseB, { opacity: 1, x: "0", y: "0", duration: 0.2 });
     });
 
-    // Animation de disparition
     li.addEventListener("mouseleave", () => {
-        gsap.to(caseA, { opacity: 0, x: "-100%", y: "100%", duration: 0.2 });
-        gsap.to(caseB, { opacity: 0, x: "100%", y: "100%", duration: 0.2 });
+        gsap.to(caseA, { ...animations[index].caseLeaveA, opacity: 0, duration: 0.2 });
+        gsap.to(caseB, { ...animations[index].caseLeaveB, opacity: 0, duration: 0.2 });
     });
-});
+}
+
+
 
 
 /*
